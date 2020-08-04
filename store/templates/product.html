@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% load cart %}
+
+{% load custom_filter %}
+
+      
+
+
+<!--Main layout-->
+<main>
+    <div class="container">
+        <!--Section: Block Content-->
+        <section class="mb-5">
+            <div class="row">
+                {% for product in product %}
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div id="mdb-lightbox-ui"></div>
+
+                    <div class="mdb-lightbox">
+                        <div class="row product-gallery mx-1">
+                            <div class="col-12 mb-0">
+                                <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px;">
+                                    <a href="/?category={{category.id}}" data-size="710x823">
+                                        <img src="{{product.image.url}}" class="img-fluid z-depth-1" style="margin-top: -90px;" />
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="view overlay rounded z-depth-1 gallery-item hoverable">
+                                            <img src="{{product.image.url}}" class="img-fluid" />
+                                            <div class="mask rgba-white-slight"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="view overlay rounded z-depth-1 gallery-item hoverable">
+                                            <img src="{{product.image.url}}" class="img-fluid" />
+                                            <div class="mask rgba-white-slight"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="view overlay rounded z-depth-1 gallery-item hoverable">
+                                            <img src="{{product.image.url}}" class="img-fluid" />
+                                            <div class="mask rgba-white-slight"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="view overlay rounded z-depth-1 gallery-item hoverable">
+                                            <img src="{{product.image.url}}" class="img-fluid" />
+                                            <div class="mask rgba-white-slight"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h5>Blue denim shirt</h5>
+                    <p class="mb-2 text-muted text-uppercase small">Shirts</p>
+                    <ul class="rating">
+                        <li>
+                            <i class="fas fa-star fa-sm text-primary"></i>
+                        </li>
+                        <li>
+                            <i class="fas fa-star fa-sm text-primary"></i>
+                        </li>
+                        <li>
+                            <i class="fas fa-star fa-sm text-primary"></i>
+                        </li>
+                        <li>
+                            <i class="fas fa-star fa-sm text-primary"></i>
+                        </li>
+                        <li>
+                            <i class="far fa-star fa-sm text-primary"></i>
+                        </li>
+                    </ul>
+                    <p>
+                        <span class="mr-1"><strong>{{product.price|currency}}</strong></span>
+                    </p>
+                    <p class="pt-1">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio, officia quis dolore quos
+                        sapiente tempore alias.
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <th class="pl-0 w-25" scope="row"><strong>Model</strong></th>
+                                    <td>Shirt 5407X</td>
+                                </tr>
+                                <tr>
+                                    <th class="pl-0 w-25" scope="row"><strong>Color</strong></th>
+                                    <td>Blue</td>
+                                </tr>
+                                <tr>
+                                    <th class="pl-0 w-25" scope="row"><strong>Delivery</strong></th>
+                                    <td>USA, Europe</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr />
+                    <div class="table-responsive mb-2">
+                        <table class="table table-sm table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="pl-0 pb-0 w-25">Quantity</td>
+                                    <td class="pb-0">Select size</td>
+                                </tr>
+                                <tr>
+                                    <td class="pl-0">
+                                        <div class="def-number-input number-input safari_only mb-0">
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+                                            <input class="quantity" min="0" name="quantity" value="1" type="number" />
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="mt-1">
+                                            <div class="form-check form-check-inline pl-0">
+                                                <input type="radio" class="form-check-input" id="small" name="materialExampleRadios" checked />
+                                                <label class="form-check-label small text-uppercase card-link-secondary" for="small">Small</label>
+                                            </div>
+                                            <div class="form-check form-check-inline pl-0">
+                                                <input type="radio" class="form-check-input" id="medium" name="materialExampleRadios" />
+                                                <label class="form-check-label small text-uppercase card-link-secondary" for="medium">Medium</label>
+                                            </div>
+                                            <div class="form-check form-check-inline pl-0">
+                                                <input type="radio" class="form-check-input" id="large" name="materialExampleRadios" />
+                                                <label class="form-check-label small text-uppercase card-link-secondary" for="large">Large</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">Buy now</button>
+                    
+                    {% if product|cart_quantity:request.session.cart %}
+                    <div class="card-footer row p-0 no-gutters">
+                    <form action="/products/{{product.id}}/" method="POST" class="">
+                      {% csrf_token %}
+                      <input hidden type="text" name="product" value="{{product.id}}">
+                      <input hidden type="text" name="remove" value="True">
+                      <input type="submit" value=" - " class="btn btn-secondary btn-sm px-3 mb-2 material-tooltip-main">
+                    </form>
+                    <div class="text-center col">{{product|cart_quantity:request.session.cart}}</div>
+
+                    <form action="/products/{{product.id}}/" method="POST" class="">
+                      {% csrf_token %}
+                      <input hidden type="text" name="product" value="{{product.id}}">
+                      <input type="submit" value=" + " class="btn btn-secondary btn-sm px-3 mb-2 material-tooltip-main">
+                    </form>
+                    </div>
+                    {% else %}
+                    <form action="/products/{{product.id}}/" method="POST" class="btn-block">
+                    {% csrf_token %}
+                    <input hidden type="text" name="product" value="{{product.id}}">
+                    <!-- <input type="submit" class="btn btn btn-light btn-md mr-1 mb-2" value="Add To Card"> -->
+                    <button type="submit" class="btn btn-light btn-md mr-1 mb-2"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    </form>
+                    {% endif %}
+
+                    <!-- <button type="button" class="btn btn-light btn-md mr-1 mb-2"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button> -->
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <!--Section: Block Content-->
+        <hr />
+    </div>
+</main>
+<!--Main layout-->
+{% endblock %}
